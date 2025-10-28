@@ -187,7 +187,7 @@ export default function Anagramas() {
             <div className="text-sm text-gray-500 mb-2">
               Ordena estas letras:
             </div>
-            <div className="text-6xl font-bold text-indigo-600 tracking-wider mb-4 flex justify-center gap-2">
+            <div className="text-lg md:text-6xl font-bold text-indigo-600 tracking-wider mb-4 flex justify-center gap-2">
               {anagrama.split("").map((letra, index) => (
                 <span
                   key={index}
