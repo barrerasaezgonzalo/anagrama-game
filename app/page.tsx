@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 // Lista de palabras de 6 letras con sus pistas
 const palabrasDB = [
@@ -151,47 +153,61 @@ export default function Anagramas() {
   const precisión = intentos > 0 ? Math.round((aciertos / intentos) * 100) : 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center p-5">
+    <div className="min-h-screen bg-[#F2F6F9] flex items-center justify-center p-5">
       <div className="max-w-2xl w-full">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-6xl font-bold text-white mb-4 drop-shadow-lg">
-            🔤 Anagramas
+        <div className="text-center mb-8 mt-4">
+          <h1 className="text-6xl font-bold text-black mb-4 inline-block ">
+            <Image
+              src={"/anagramas.png"}
+              alt={"Anagramas"}
+              width={100}
+              height={100}
+              style={{
+                display: "inline",
+                marginRight: "2rem",
+              }}
+            />
+            Anagramas
           </h1>
-          <p className="text-white text-xl">Descubre la palabra correcta</p>
+          <p className="text-black text-lg">
+            Cómo jugar: Ordena las letras para formar una palabra válida. Usa
+            las pistas si las necesitas (pero valen menos puntos). ¡Mantén tu
+            racha!
+          </p>
         </div>
 
         {/* Panel de estadísticas */}
         <div className="grid grid-cols-4 gap-3 mb-8">
-          <div className="bg-white/20 backdrop-blur-sm rounded-xl p-4 text-center">
+          <div className="bg-blue-500 backdrop-blur-sm rounded-xl p-4 text-center">
             <div className="text-3xl font-bold text-white">{puntuacion}</div>
             <div className="text-white/80 text-sm">Puntos</div>
           </div>
-          <div className="bg-white/20 backdrop-blur-sm rounded-xl p-4 text-center">
+          <div className="bg-blue-500 backdrop-blur-sm rounded-xl p-4 text-center">
             <div className="text-3xl font-bold text-white">{aciertos}</div>
             <div className="text-white/80 text-sm">Aciertos</div>
           </div>
-          <div className="bg-white/20 backdrop-blur-sm rounded-xl p-4 text-center">
+          <div className="bg-blue-500 backdrop-blur-sm rounded-xl p-4 text-center">
             <div className="text-3xl font-bold text-white">{precisión}%</div>
             <div className="text-white/80 text-sm">Precisión</div>
           </div>
-          <div className="bg-white/20 backdrop-blur-sm rounded-xl p-4 text-center">
+          <div className="bg-blue-500 backdrop-blur-sm rounded-xl p-4 text-center">
             <div className="text-3xl font-bold text-white">{racha}</div>
             <div className="text-white/80 text-sm">Racha</div>
           </div>
         </div>
 
         {/* Juego principal */}
-        <div className="bg-white rounded-3xl shadow-2xl p-8 mb-6">
+        <div className="bg-[white] rounded-3xl shadow-2xl p-8 mb-6">
           <div className="text-center mb-6">
             <div className="text-sm text-gray-500 mb-2">
               Ordena estas letras:
             </div>
-            <div className="text-lg md:text-6xl font-bold text-indigo-600 tracking-wider mb-4 flex justify-center gap-2">
+            <div className="text-lg md:text-6xl font-bold text-white tracking-wider mb-4 flex justify-center gap-2">
               {anagrama.split("").map((letra, index) => (
                 <span
                   key={index}
-                  className="inline-block bg-indigo-100 px-4 py-3 rounded-lg shadow-md animate-bounce"
+                  className="inline-block bg-[#FE8111] px-4 py-3 rounded-lg shadow-md animate-bounce"
                   style={{
                     animationDelay: `${index * 0.1}s`,
                     animationDuration: "1s",
@@ -205,7 +221,7 @@ export default function Anagramas() {
 
             <button
               onClick={mezclarDeNuevo}
-              className="text-indigo-600 hover:text-indigo-800 text-sm font-semibold underline mb-4"
+              className="text-blue-500 hover:text-indigo-800 text-sm font-semibold  mb-4"
             >
               🔄 Mezclar letras
             </button>
@@ -234,7 +250,7 @@ export default function Anagramas() {
               onChange={(e) => setRespuesta(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Escribe tu respuesta aquí..."
-              className="w-full px-6 py-4 text-2xl text-center border-3 border-indigo-300 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200 transition-all uppercase text-indigo-600 font-bold placeholder:text-gray-400"
+              className="w-full px-6 py-4 text-2xl text-center border-3 border-blue-300 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-indigo-200 transition-all uppercase text-blue-500 font-bold placeholder:text-gray-400"
               autoFocus
             />
           </div>
@@ -243,7 +259,7 @@ export default function Anagramas() {
             <button
               onClick={verificarRespuesta}
               disabled={!respuesta.trim()}
-              className="flex-1 bg-indigo-600 text-white font-bold py-4 px-6 rounded-xl hover:bg-indigo-700 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg text-lg"
+              className="flex-1 bg-blue-500 text-white font-bold py-4 px-6 rounded-xl hover:bg-indigo-700 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg text-lg"
             >
               Verificar ✓
             </button>
@@ -270,14 +286,26 @@ export default function Anagramas() {
           )}
         </div>
 
-        {/* Instrucciones */}
-        <div className="bg-white/20 backdrop-blur-sm rounded-xl p-6 text-white text-center">
-          <p className="text-sm">
-            <strong>Cómo jugar:</strong> Ordena las letras para formar una
-            palabra válida. Usa las pistas si las necesitas (pero valen menos
-            puntos). ¡Mantén tu racha!
-          </p>
-        </div>
+        <footer className="mt-10 text-black text-center">
+          <p>Creado a las 3 AM cuando el café ya no hacía efecto ☕💻</p>
+
+          <Link href="https://chilehub.cl">
+            <Image
+              src="/chilehub.png"
+              alt="Logo de Sopa de Letras"
+              width={200}
+              height={80}
+              style={{
+                width: "200px",
+                height: "80px",
+                objectFit: "contain",
+                marginTop: "1rem",
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+            />
+          </Link>
+        </footer>
       </div>
     </div>
   );
